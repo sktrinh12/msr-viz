@@ -1,8 +1,6 @@
 # pull official base image
 FROM node:alpine as build
-ARG WORKSPACE
 ARG REACT_APP_BACKEND_URL
-ENV WORKSPACE=$WORKSPACE
 ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 ENV GENERATE_SOURCEMAP=false
 ENV CI=false
@@ -10,16 +8,15 @@ ENV CI=false
 RUN apk update && apk upgrade --no-cache && \
 		apk add --no-cache
 
-WORKDIR ${WORKSPACE}/app
+WORKDIR /app
 
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
-COPY /package*.json ./
+
+COPY /msr-viz ./
+
 RUN npm install 
-
-COPY / ./
-
 RUN npm run test
 RUN npm run build
 
