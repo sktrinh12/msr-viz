@@ -26,7 +26,7 @@ interface PlotDataArray {
 export default function DisplayTable() {
   const { REACT_APP_BACKEND_URL } = process.env
   const rootURL = `${REACT_APP_BACKEND_URL}/v1/fetch-data?compound_id=`
-  const [msrData, setMsrData] = useState([])
+  const [msrData, setMsrData] = useState({ data: [] })
   const [nLimit, setNLimit] = useState(20)
   const [msrPlotLoading, setMsrPlotLoading] = useState(false)
   const [loading, setLoading] = useState(true)
