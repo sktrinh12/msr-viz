@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import MSRPlot from './components/MSRPlot'
+// import { mockData, plotCompt } from './mockData.js'
 import { mockData } from './mockData.js'
 import axios from 'axios'
 // import PlotlyComponent from 'react-plotly.js'
@@ -38,7 +39,7 @@ describe('MSR plot components', () => {
     getSpy.mockReset()
     getSpy.mockRestore()
   })
-  test('Check if plotly render', () => {
+  it('Check if plotly render', () => {
     jest.mock('plotly.js', () => {
       return {
         default: jest.fn(),
@@ -47,9 +48,18 @@ describe('MSR plot components', () => {
     render(<MSRPlot msrData={mockData} />)
     const plotContainer = screen.getByTestId('msr-plot-container')
     expect(plotContainer).toBeInTheDocument()
+    // const wrapper = mount(<MSRPlot msrData={mockData} />)
     // console.log(wrapper.debug({ verbose: true }))
+    // console.log(plotCompt.debug({ verbose: true }))
+    // expect(wrapper).toEqual(plotCompt)
     // expect(wrapper.find(Plot).exists()).toBe(true)
     // expect(wrapper.find(PlotlyComponent).exists()).toBe(true)
     // expect(wrapper.findWhere((node) => node.name() === 'Plot')).toBe(true)
+  })
+  it('renders a NotFound component if no data is given', () => {
+    const emptyData = { data: [] }
+    render(<MSRPlot msrData={emptyData} />)
+    const notFound = screen.getByText('404 not found. Please check the url')
+    expect(notFound).toBeInTheDocument()
   })
 })
