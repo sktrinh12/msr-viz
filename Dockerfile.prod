@@ -10,15 +10,15 @@ ENV CI=false
 RUN apk update && apk upgrade --no-cache && \
 		apk add --no-cache
 
-WORKDIR ${WORKSPACE}
+WORKDIR ${WORKSPACE}/app
 
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
-COPY ${WORKSPACE}/package*.json ./
+COPY /package*.json ./
 RUN npm install 
 
-COPY ${WORKSPACE}/ ./
+COPY / ./
 
 RUN npm run test
 RUN npm run build
