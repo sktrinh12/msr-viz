@@ -1,3 +1,5 @@
+import PlotlyComponent from 'react-plotly.js'
+
 const mockData = {
   data: [
     {
@@ -174,4 +176,130 @@ const mockData = {
   },
 }
 
-export { mockData }
+const plotCompt = (
+  <div data-testid='msr-plot-container'>
+    <PlotlyComponent
+      data={[
+        {
+          x: [
+            0.000001, 0.000009999999999999999, 0.000009999999999999999,
+            0.000009999999999999999, 0.000009999999999999999,
+            0.00000910276885052953, 0.000010226253665817177,
+            0.000009821174853798984, 0.00000885087694251565,
+            0.000006196786978541191, 0.000009999999999999999,
+            0.000009999999999999999, 0.000009999999999999999,
+            0.000009999999999999999, 0.000009999999999999999,
+            0.000009999999999999999, 0.000009999999999999999,
+            0.000009999999999999999, 0.000009999999999999999,
+            0.000009999999999999999,
+          ],
+          y: [
+            1, 1, 1, 1, 1, 0.8286040074617087, 1.0457626403763924,
+            0.9645547550889347, 0.7833802265155504, 0.8116612029751968, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1,
+          ],
+          mode: 'markers',
+          name: 'ratios',
+          text: [
+            'cmpd_id: FT003977<br>date: 2022-11-11T17:53:32',
+            'cmpd_id: FT007578<br>date: 2022-11-11T17:53:32',
+            'cmpd_id: FT009070<br>date: 2022-11-11T17:53:32',
+            'cmpd_id: FT009067<br>date: 2022-11-11T17:53:32',
+            'cmpd_id: FT008741<br>date: 2022-11-11T17:53:32',
+            'cmpd_id: FT009069<br>date: 2022-11-11T17:53:32',
+            'cmpd_id: FT008821<br>date: 2022-11-04T15:34:14',
+            'cmpd_id: FT008894<br>date: 2022-11-04T15:34:14',
+            'cmpd_id: FT009007<br>date: 2022-11-04T15:34:14',
+            'cmpd_id: FT008945<br>date: 2022-11-04T15:34:14',
+            'cmpd_id: FT008980<br>date: 2022-10-21T16:30:53',
+            'cmpd_id: FT008944<br>date: 2022-11-04T15:34:14',
+            'cmpd_id: FT008947<br>date: 2022-10-21T16:30:53',
+            'cmpd_id: FT007615<br>date: 2022-11-04T15:34:14',
+            'cmpd_id: FT008798<br>date: 2022-10-28T15:33:22',
+            'cmpd_id: FT008923<br>date: 2022-10-13T17:50:37',
+            'cmpd_id: FT008869<br>date: 2022-09-30T17:09:29',
+            'cmpd_id: FT008893<br>date: 2022-09-23T18:13:12',
+            'cmpd_id: FT008740<br>date: 2022-09-30T17:09:29',
+            'cmpd_id: FT008868<br>date: 2022-09-19T16:37:47',
+          ],
+          marker: { size: 12 },
+          hovertemplate:
+            '<b>%{text}</b><br><br>%{yaxis.title.text}: %{y:.2f}<br>%{xaxis.title.text}: %{x}<br>',
+        },
+        {
+          x: [-0.10602739477891537, 0.01943312270286054],
+          y: [0.9400860976592211, 0.9400860976592211],
+          mode: 'lines',
+          name: 'RL',
+          line: { color: 'rgb(52, 235, 61)', dash: 'dashdot', width: 2 },
+          hovertemplate: '%{y:.2f}',
+        },
+        {
+          x: [-0.10602739477891537, 0.01943312270286054],
+          y: [0.9985683869592029, 0.9985683869592029],
+          mode: 'lines',
+          name: 'RL',
+          showlegend: false,
+          line: { color: 'rgb(52, 235, 61)', dash: 'dashdot', width: 2 },
+          hovertemplate: '%{y:.2f}',
+        },
+        {
+          x: [-0.10602739477891537, 0.01943312270286054],
+          y: [0.8288656026069092, 0.8288656026069092],
+          mode: 'lines',
+          name: 'LsA',
+          line: { color: 'rgb(255, 0, 0)', dash: 'dot', width: 2 },
+          hovertemplate: '%{y:.2f}',
+        },
+        {
+          x: [-0.10602739477891537, 0.01943312270286054],
+          y: [1.1325602790004294, 1.1325602790004294],
+          mode: 'lines',
+          name: 'LsA',
+          showlegend: false,
+          line: { color: 'rgb(255, 0, 0)', dash: 'dot', width: 2 },
+          hovertemplate: '%{y:.2f}',
+        },
+        {
+          x: [-0.10602739477891537, 0.01943312270286054],
+          y: [0.9688860914175309, 0.9688860914175309],
+          mode: 'lines',
+          name: 'MR',
+          line: { color: 'rgb(36, 86, 224)', width: 2 },
+          hovertemplate: '%{y:.2f}',
+        },
+        {
+          x: [-0.10602739477891537, 0.01943312270286054],
+          y: [1, 1],
+          mode: 'lines',
+          name: 'Ref',
+          line: { color: 'rgb(0,0,0)', width: 1 },
+          hovertemplate: '%{y:.2f}',
+        },
+      ]}
+      layout={{
+        title: 'MSR plot',
+        xaxis: { title: 'Geomean (nM)', zeroline: false, type: 'log' },
+        yaxis: { title: 'Ratios', zeroline: false, type: 'log' },
+        annotations: [
+          {
+            xref: 'paper',
+            yref: 'paper',
+            x: 1,
+            xanchor: 'left',
+            y: 0.5,
+            yanchor: 'top',
+            text: '<b>MSR</b>: 1.17',
+            showarrow: false,
+          },
+        ],
+      }}
+      config={{ displaylogo: false }}
+      debug={false}
+      useResizeHandler={false}
+      style={{ position: 'relative', display: 'inline-block' }}
+    />
+  </div>
+)
+
+export { mockData, plotCompt }
