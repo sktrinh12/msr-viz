@@ -8,7 +8,6 @@ pipeline {
     }
     environment{
         AWSID = credentials('AWSID')
-        GITHUB_PAT = credentials('github-kinnate-secret-text')
         DOCKER_PSW = credentials('DOCKER_PASSWORD')
         DOCKER_CONFIG = "${WORKSPACE}/docker.config"
         NAMESPACE = 'apps'
@@ -35,7 +34,7 @@ pipeline {
         
         stage('docker build msr app') {
             steps{
-                sh( label: 'Docker Build MSR app', script:
+                sh( label: 'Docker Build $APP_NAME app', script:
                 '''
                 #!/bin/bash
                 set -x
@@ -52,7 +51,7 @@ pipeline {
         
         stage('docker push to ecr') {
             steps {
-                sh(label: 'ECR docker push msr-viz', script:
+                sh(label: 'ECR docker push $APP_NAME', script:
                 '''
                 docker push $AWSID.dkr.ecr.us-west-2.amazonaws.com/${APP_NAME}
                 ''', returnStdout: true
