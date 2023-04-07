@@ -39,11 +39,12 @@ pipeline {
                 '''
                 #!/bin/bash
                 set -x
+								ls -ltra
                 docker build \
                 --no-cache --network=host --build-arg REACT_APP_BACKEND_URL=http://geomean.backend.kinnate \
                 --build-arg WORKSPACE=${WORKSPACE} --memory="2g" --memory-swap="4g" \
                 -t $AWSID.dkr.ecr.us-west-2.amazonaws.com/${APP_NAME} \
-                -f $WORKSPACE/$APP_NAME/Dockerfile.prod .
+                -f Dockerfile.prod .
                 ''', returnStdout: true
                 )
             }
