@@ -11,7 +11,7 @@ pipeline {
         GITHUB_PAT = credentials('github-kinnate-secret-text')
         DOCKER_PSW = credentials('DOCKER_PASSWORD')
         DOCKER_CONFIG = "${WORKSPACE}/docker.config"
-        NAMESPACE = 'msr'
+        NAMESPACE = 'apps'
         APP_NAME = 'msr-viz'
         AWS_PAGER = ''
     }
@@ -97,7 +97,8 @@ pipeline {
                   --set image.repository=${AWSID}.dkr.ecr.us-west-2.amazonaws.com/${APP_NAME} \
                   --set image.tag=latest --set containers.name=react \
                   --set containers.ports.containerPort=80 --set app=${APP_NAME} \
-                  --set terminationGracePeriodSeconds=10 --set service.type=LoadBalancer
+                  --set terminationGracePeriodSeconds=10 --set service.type=ClusterIP \
+                  --set ingress.enabled=false
                 fi
                 '''
                 }
