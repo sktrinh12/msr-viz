@@ -83,12 +83,11 @@ pipeline {
                 cd $WORKSPACE
                 curl -LO https://storage.googleapis.com/kubernetes-release/release/\$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
                 chmod +x ./kubectl
-                ./kubectl get ns $NAMESPACE
-                if ./kubectl get namespace $NAMESPACE > /dev/null 2>&1; then
-                  echo "Namespace $NAMESPACE already exists"
+                if ./kubectl get pod -n $NAMESPACE -l app=$APP_NAME | grep -q $APP_NAME; then
+                  echo "$APP_NAME pods already exists"
                   ./kubectl rollout restart deploy/${APP_NAME}-deploy -n $NAMESPACE
                 else
-                  echo "Namespace $NAMESPACE does not exist; deploy using helm"
+                  echo "pods $APP_NAME do not exist; deploy using helm"
                   git clone https://github.com/sktrinh12/helm-basic-app-chart.git
                   cd helm-basic-app-chart
                   helm install k8sapp-${APP_NAME} . --set service.namespace=$NAMESPACE \
@@ -98,7 +97,7 @@ pipeline {
                   --set image.tag=latest --set containers.name=react \
                   --set containers.ports.containerPort=80 --set app=${APP_NAME} \
                   --set terminationGracePeriodSeconds=10 --set service.type=ClusterIP \
-                  --set ingress.enabled=false
+                  --set ingress.enabled=false --namespace $NAMESPACE
                 fi
                 '''
                 }
