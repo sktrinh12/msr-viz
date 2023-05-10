@@ -2,9 +2,7 @@
 
 ### Introduction
 
-The MSR is a statistical parameter that characterizes the reproducibility of potency estimates from in vitro concentration-response assays. Biological activity expressed as potency of compounds is an important parameter in screening and drug discovery.
-
-- visualise Bland-Altman plot of biochemical and cellular data
+The MSR is a statistical parameter that characterizes the reproducibility of potency estimates from in vitro concentration-response assays. Biological activity expressed as potency of compounds is an important parameter in screening and drug discovery. This app allows users to visualise the Bland-Altman plot of biochemical and cellular data stored in the DM oracle database.
 
 ### Reference papers
 
