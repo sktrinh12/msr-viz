@@ -97,6 +97,7 @@ pipeline {
                   --set image.tag=latest --set containers.name=react \
                   --set containers.ports.containerPort=80 --set app=${APP_NAME} \
                   --set terminationGracePeriodSeconds=10 --set service.type=ClusterIP \
+									--set resources.limits.cpu=200m,resources.limits.memory=200Mi,resources.requests.cpu=100m,resources.requests.memory=128Mi \
                   --set ingress.enabled=false --namespace $NAMESPACE
                 fi
                 '''
